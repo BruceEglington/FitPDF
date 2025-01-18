@@ -10,6 +10,7 @@
         <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
+        <ProjectName Condition="'$(ProjectName)'==''">Fitpdf</ProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -82,7 +83,6 @@
         <DCC_DcuOutput>C:\DCU2010\</DCC_DcuOutput>
         <DCC_E>false</DCC_E>
         <Custom_Styles>&quot;Iceberg Classico|VCLSTYLE|$(BDSCOMMONDIR)\Styles\IcebergClassico.vsf&quot;;Windows10|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10.vsf;&quot;Windows10 Dark|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10Dark.vsf&quot;;&quot;Windows10 SlateGray|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10SlateGray.vsf&quot;;Carbon|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Carbon.vsf;&quot;Golden Graphite|VCLSTYLE|$(BDSCOMMONDIR)\Styles\GoldenGraphite.vsf&quot;;Obsidian|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Obsidian.vsf;&quot;Smokey Quartz Kamri|VCLSTYLE|$(BDSCOMMONDIR)\Styles\SmokeyQuartzKamri.vsf&quot;;Glossy|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Glossy.vsf;&quot;Windows10 Clear Day|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10ClearDay.vsf&quot;;Zircon|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Zircon.vsf</Custom_Styles>
-        <GetItPackages>SVGIconImageList-12-4.1.1;VCLStyle-Windows10ClearDay-1.0;VCLStyle-Zircon-1.0</GetItPackages>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <VerInfo_MajorVer>2</VerInfo_MajorVer>
@@ -140,9 +140,8 @@
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <VerInfo_AutoGenVersion>false</VerInfo_AutoGenVersion>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Keys>CompanyName=EggSoft;FileVersion=2.7.0.7;InternalName=FitPDF;LegalCopyright=Bruce Eglington;LegalTrademarks=;OriginalFilename=FitPDF;ProductVersion=2.5.0.7;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=EggSoft;FileVersion=2.7.0.1;InternalName=FitPDF;LegalCopyright=Bruce Eglington;LegalTrademarks=;OriginalFilename=FitPDF;ProductVersion=2.7.0.7;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Build>7</VerInfo_Build>
         <VerInfo_MajorVer>2</VerInfo_MajorVer>
         <VerInfo_MinorVer>7</VerInfo_MinorVer>
         <Icon_MainIcon>Fitpdf_Icon.ico</Icon_MainIcon>
@@ -150,9 +149,10 @@
         <DCC_DebugInformation>2</DCC_DebugInformation>
         <DCC_MapFile>3</DCC_MapFile>
         <BT_BuildType>Debug</BT_BuildType>
-        <DCC_UnitSearchPath>C:\Users\bre255\Documents\TMSSoftware\FlexCelVCLNT\Packages\dRio\Win64\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <DCC_UnitSearchPath>C:\Users\bre255\Documents\TMSSoftware\FlexCelVCLNT\Packages\d12\Win64\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_Define>madExcept;$(DCC_Define)</DCC_Define>
+        <DCC_ShowGeneralMessages>true</DCC_ShowGeneralMessages>
+        <VerInfo_Build>1</VerInfo_Build>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -198,15 +198,14 @@
         <DCCReference Include="PDF_mathproc.pas"/>
         <DCCReference Include="VirtMode\UCellReader.pas"/>
         <DCCReference Include="VirtMode\USparseArray.pas"/>
-        <DCCReference Include="PDF_ShtImData.pas">
-            <Form>fmSheetImport</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="..\Eglington Delphi common code items\Allsorts.pas"/>
         <DCCReference Include="..\Eglington Delphi common code items\NumRecipes.pas"/>
         <DCCReference Include="..\Eglington Delphi common code items\NumRecipes_varb.pas"/>
         <DCCReference Include="..\Eglington Delphi common code items\RecError.pas">
             <Form>ReconcileErrorForm</Form>
+        </DCCReference>
+        <DCCReference Include="PDF_ShtImData.pas">
+            <Form>fmSheetImport</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">
@@ -265,6 +264,12 @@
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k290.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp290.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\madCollection\madBasic\BDS23\win32\madBasic_.bpl">madBasic  ·  www.madshi.net</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\madCollection\madBasic\BDS23\win32\madHelp_.bpl">madHelp  ·  www.madshi.net</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\madCollection\madDisAsm\BDS23\win32\madDisAsm_.bpl">madDisAsm  ·  www.madshi.net</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\madCollection\madExcept\BDS23\win32\madExcept_.bpl">madExcept  ·  www.madshi.net</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\madCollection\madExcept\BDS23\win32\madExceptVcl_.bpl">madExceptVcl  ·  www.madshi.net</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\madCollection\madExcept\BDS23\win32\madExceptWizard_.bpl">madExceptWizard  ·  www.madshi.net</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Platforms>
@@ -274,6 +279,12 @@
             <Deployment Version="4">
                 <DeployFile LocalName="C:\EXE32\Fitpdf.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="C:\EXE64\Fitpdf.exe" Configuration="Release" Class="ProjectOutput"/>
+                <DeployFile LocalName="C:\EXE64\Fitpdf.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>Fitpdf.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">
                         <Operation>1</Operation>
@@ -928,6 +939,9 @@
                     <Platform Name="Win64">
                         <Operation>1</Operation>
                     </Platform>
+                    <Platform Name="Win64x">
+                        <Operation>1</Operation>
+                    </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectiOSDeviceDebug">
                     <Platform Name="iOSDevice32">
@@ -1221,6 +1235,7 @@
                 <ProjectRoot Platform="OSXARM64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="Win64x" Name="$(PROJECTNAME)"/>
             </Deployment>
             <ModelSupport>False</ModelSupport>
         </BorlandProject>

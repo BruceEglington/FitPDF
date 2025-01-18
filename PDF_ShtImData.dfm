@@ -1,6 +1,7 @@
 object fmSheetImport: TfmSheetImport
   Left = 0
   Top = 0
+  ActiveControl = bbImport
   Caption = 'Import data from Excel spreadsheet'
   ClientHeight = 839
   ClientWidth = 878
@@ -67,6 +68,7 @@ object fmSheetImport: TfmSheetImport
       ImageIndex = 9
       ImageName = 'cancel'
       Images = SVGIconVirtualImageList1
+      ModalResult = 2
       TabOrder = 1
       OnClick = bbCancelClick
     end
@@ -310,6 +312,7 @@ object fmSheetImport: TfmSheetImport
         ImageIndex = 27
         ImageName = 'import'
         Images = SVGIconVirtualImageList1
+        ModalResult = 1
         NumGlyphs = 2
         TabOrder = 0
         OnClick = bbImportClick

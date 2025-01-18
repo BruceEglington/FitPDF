@@ -285,6 +285,9 @@ begin
     // read data value
 
     dmPDF.cdsRawData.DisableControls;
+    dmPDF.cdsAgeList.DisableControls;
+    dmPDF.cdsRawData.LogChanges := false;
+    dmPDF.cdsAgeList.LogChanges := false;
     j := 1;
     xls.ActiveSheet := MyActiveSheetNum;
     //ShowMessage('Active sheet to read is number '+Int2Str(xls.ActiveSheet));
@@ -478,8 +481,10 @@ begin
   //ShowMessage('5');
   if (dmPDF.cdsRawData.RecordCount > 2) then dmPDF.DataImported := true;
   dmPDF.cdsRawData.First;
-  dmPDF.cdsRawData.EnableControls;
+  //dmPDF.cdsRawData.EnableControls;
+  //dmPDF.cdsAgeList.EnableControls;
   sbSheet.SimpleText := 'Finished importing all data';
+  //ShowMessage('Raw data imported'); //*****************
   sbSheet.Refresh;
   Application.HandleMessage;
   //if dmPDF.DataImported then  ShowMessage('Data have been imported');

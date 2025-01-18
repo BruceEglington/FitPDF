@@ -41,13 +41,10 @@ type
     pOriginalDataMain: TPanel;
     Panel2: TPanel;
     pDefinition: TPanel;
-    pOriginalData: TPanel;
-    Panel24: TPanel;
     ActionManager1: TActionManager;
     Splitter5: TSplitter;
     Splitter6: TSplitter;
     Panel1: TPanel;
-    dbgRawData: TDBGrid;
     dbnRawData: TDBNavigator;
     CalculatePDF1: TMenuItem;
     N2: TMenuItem;
@@ -97,8 +94,6 @@ type
     Panel12: TPanel;
     TeeCommander2: TTeeCommander;
     rgGraphType: TRadioGroup;
-    DBGrid1: TDBGrid;
-    Panel4: TPanel;
     Splitter1: TSplitter;
     Splitter2: TSplitter;
     Panel5: TPanel;
@@ -120,10 +115,6 @@ type
     Label15: TLabel;
     eGraphTitle: TEdit;
     bCheckFolders: TButton;
-    Panel6: TPanel;
-    pGraphOriginalData: TPanel;
-    ChartOriginalData: TChart;
-    Series7: TPointSeries;
     Options1: TMenuItem;
     Showonlyfirst50rowsofimportspreadsheet1: TMenuItem;
     OptionsOmitNegativeData1: TMenuItem;
@@ -227,6 +218,15 @@ type
     Button2: TButton;
     Test1: TMenuItem;
     SVGIconVirtualImageList1: TSVGIconVirtualImageList;
+    pOriginalData: TPanel;
+    Panel24: TPanel;
+    dbgRawData: TDBGrid;
+    Panel4: TPanel;
+    dbgAgeList: TDBGrid;
+    pGraphOriginalData: TPanel;
+    ChartOriginalData: TChart;
+    Series7: TPointSeries;
+    Panel6: TPanel;
     procedure ImportRawData1Click(Sender: TObject);
     procedure About1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -246,7 +246,6 @@ type
     procedure StepsMaximumClick(Sender: TObject);
     procedure StepsUserSpecifiedClick(Sender: TObject);
     procedure ExportProvenanceLimits1Click(Sender: TObject);
-    procedure ImportGeochronData1Click(Sender: TObject);
     procedure OptionsUseUppermostCutoffForProvenance1Click(Sender: TObject);
     procedure rgGraphTypeClick(Sender: TObject);
     procedure ExportAssociationSampleAges1Click(Sender: TObject);
@@ -271,6 +270,7 @@ type
     procedure CalculatePDF(GraphType : string; NormalisationType : string; tAge : double);
     procedure Delay(ms: integer);
     procedure CalculateClusterLimits;
+    procedure DetermineAssociations;
   end;
 
 var
@@ -292,154 +292,6 @@ var
   //ImportForm : TfmSheetImport;
   AboutForm : TAboutBox;
 
-procedure TfmPDFMain.ImportGeochronData1Click(Sender: TObject);
-var
-  i, ii : integer;
-  //DataImported : boolean;
-  MaxX, MinX,
-  Ke, sqrtbeta1,
-  Sigma, Sigma2, Sigma3, Sigmabeta1,
-  tx, Mean : double;
-  tGrainAge, tAge : double;
-  tMatchingAge : double;
-begin
-  sbMain.Panels[1].Text := 'Importing';
-  sbMain.Refresh;
-  tsGraph.TabVisible := false;
-  tsVerticalView.TabVisible := false;
-  pc1.ActivePage := tsControl;
-  dmPDF.DataImported := false;
-  try
-      dmPDF.cdsRawData.EmptyDataSet;
-      dmPDF.cdsPDF.EmptyDataSet;
-      dmPDF.cdsHistogram.EmptyDataSet;
-      dmPDF.cdsAgeList.EmptyDataSet;
-      dmPDF.cdsAssocSampleAge.EmptyDataSet;
-      //ImportForm := TfmSheetImport.Create(Self);
-      //ImportForm.OpenDialogSprdSheet.FileName := '';
-      //ImportForm.FillData;
-      //ImportForm.FlexCelImport1.CloseFile;
-      //ImportForm.Free;
-  finally
-  end;
-  fmSheetImport.pData.Visible := false;
-  fmSheetImport.ShowModal;
-  if dmPDF.DataImported then
-  begin
-    //Form1.Close;
-    dmPDF.cdsRawData.First;
-    //for i := 1 to 10 do
-    //begin
-    //  ShowMessage(IntToStr(i)+'  '+FormatFloat('####0.000',dmPDF.cdsRawDataData.AsFloat)+'   '+FormatFloat('####0.000',dmPDF.cdsRawDataSigma.AsFloat));
-    //  dmPDF.cdsRawData.Next;
-    //end;
-    NPts := dmPDF.cdsRawData.RecordCount;
-    sbMain.Panels[0].Text := Int2Str(NPts);
-    sbMain.Refresh;
-    //ShowMessage(IntToStr(NPts));
-    if (NPts > 2) then
-    begin
-      dbgRawData.DataSource := nil;
-      dbnRawData.DataSource := nil;
-      dmPDF.cdsRawData.First;
-      Mean := 0.0;
-      MaxX := dmPDF.cdsRawDataData.AsFloat;
-      MinX := dmPDF.cdsRawDataData.AsFloat;
-      for i := 1 to NPts do
-      begin
-        Mean := Mean +  dmPDF.cdsRawDataData.AsFloat;
-        if (dmPDF.cdsRawDataData.AsFloat > MaxX) then MaxX := dmPDF.cdsRawDataData.AsFloat;
-        if (dmPDF.cdsRawDataData.AsFloat < MinX) then MinX := dmPDF.cdsRawDataData.AsFloat;
-        dmPDF.cdsRawData.Next;
-      end;
-      Mean := Mean / (1.0*NPts);
-      dmPDF.cdsRawData.First;
-      Sigma2 := 0.0;
-      Sigma3 := 0.0;
-      for i := 1 to NPts do
-      begin
-        tx := dmPDF.cdsRawDataData.AsFloat - Mean;
-        Sigma2 := Sigma2 +  (tx*tx);
-        Sigma3 := Sigma3 + (tx*tx*tx);
-        dmPDF.cdsRawData.Next;
-      end;
-      tx := LogBase(1.0*Npts,2.0);
-      //ShowMessage('log2(Npts) is '+FormatFloat('####0.0000',tx));
-      Sigma := sqrt(sigma2/(1.0*NPts-1.0));
-      sqrtbeta1 := Sigma3/(power(3.0/2.0,Sigma2));
-      sigmabeta1 := sqrt((6.0*(Npts-2))/(1.0*(Npts+1)*(Npts+3)));
-      Ke := 1.0 + sqrtbeta1/sigmabeta1;
-      //ShowMessage('Ke before log2 is '+FormatFloat('####0.0000',Ke));
-      Ke := LogBase(1.0 + sqrtbeta1/sigmabeta1,2.0);
-      //ShowMessage('Ke after log2 is '+FormatFloat('####0.0000',Ke));
-      OptimumBinWidth := (MaxX - MinX)/(1.0+LogBase(1.0*Npts,2.0)+Ke);
-      //ShowMessage('Doane Optimum bin width is '+FormatFloat('####0.0000',OptimumBinWidth));
-      tx := power(-1.0/3.0,1.0*NPts);
-      OptimumBinWidth := 3.49 * Sigma * power(-1.0/3.0,1.0*NPts);
-      //ShowMessage('Max is '+FormatFloat('####0.0000',MaxX));
-      //ShowMessage('Min is '+FormatFloat('####0.0000',MinX));
-      //ShowMessage('Mean is '+FormatFloat('####0.0000',Mean));
-      //ShowMessage('Sigma is '+FormatFloat('####0.0000',Sigma));
-      //ShowMessage('Sigma2 is '+FormatFloat('####0.0000',Sigma2));
-      //ShowMessage('Sigma3 is '+FormatFloat('####0.0000',Sigma3));
-      //ShowMessage('sqrtbeta1 is '+FormatFloat('####0.0000',sqrtbeta1));
-      //ShowMessage('sigmabeta1 is '+FormatFloat('####0.0000',sigmabeta1));
-      //ShowMessage('power is '+FormatFloat('####0.0000',tx));
-      //ShowMessage('Optimum bin width is '+FormatFloat('####0.0000',OptimumBinWidth));
-      if (OptionsOmitNegativeData1.Checked) then
-      begin
-        dmPDF.cdsRawData.Last;
-        repeat
-          if (dmPDF.cdsRawDataData.AsFloat < 0.0) then
-          begin
-            dmPDF.cdsRawData.Delete;
-          end else
-          begin
-            dmPDF.cdsRawData.Prior;
-          end;
-        until dmPDF.cdsRawData.Bof;
-      end;
-      dmPDF.cdsAgeList.EmptyDataSet;
-      dmPDF.cdsRawData.First;
-      ChartOriginalData.Series[0].Clear;
-      repeat
-        tAge := dmPDF.cdsRawDataUnitAge.AsFloat;
-        tGrainAge := dmPDF.cdsRawDataData.AsFloat;
-        dmPDF.cdsAgeList.Locate('UnitAge',tAge,[]);
-        tMatchingAge := dmPDF.cdsAgeListUnitAge.AsFloat;
-        if (tAge <> tMatchingAge) then
-        begin
-          try
-            if (tAge > NoDataValue) then
-            begin
-              dmPDF.cdsAgeList.Append;
-              dmPDF.cdsAgeListUnitAge.AsFloat := tAge;
-              dmPDF.cdsAgeListClassification.AsString := 'nd';
-              dmPDF.cdsAgeListClassNum.AsInteger := 0;
-              dmPDF.cdsAgeList.Post;
-            end;
-          except
-          end;
-        end;
-        ChartOriginalData.Series[0].AddXY(tGrainAge,tAge);
-        dmPDF.cdsRawData.Next;
-      until (dmPDF.cdsRawData.Eof);
-    end;
-    dbgRawData.DataSource := dmPDF.dsRawData;
-    dbnRawData.DataSource := dmPDF.dsRawData;
-    dmPDF.cdsRawData.First;
-    dmPDF.cdsAgeList.First;
-    fmPDFMain.Refresh;
-    sbMain.Panels[1].Text := 'Data imported';
-    sbMain.Refresh;
-  //end else
-  //begin
-  //  sbMain.Panels[1].Text := 'Import cancelled';
-  //  sbMain.Refresh;
-  end;
-  dmPDF.cdsRawData.EnableControls;
-end;
-
 procedure TfmPDFMain.ImportRawData1Click(Sender: TObject);
 var
   i, ii : integer;
@@ -456,6 +308,7 @@ var
 begin
   sbMain.Panels[1].Text := 'Importing';
   sbMain.Refresh;
+  Application.HandleMessage;
   tsGraph.TabVisible := false;
   tsVerticalView.TabVisible := false;
   tsCumulativeProbability.TabVisible := false;
@@ -463,6 +316,15 @@ begin
   tsHeat.TabVisible := false;
   pc1.ActivePage := tsControl;
   dmPDF.DataImported := false;
+  dmPDF.cdsRawData.LogChanges := false;
+  dmPDF.cdsPDF.LogChanges := false;
+  dmPDF.cdsHistogram.LogChanges := false;
+  dmPDF.cdsAgeList.LogChanges := false;
+  dmPDF.cdsAssocSampleAge.LogChanges := false;
+  dmPDF.cdsAssociations.LogChanges := false;
+  dmPDF.cdsSamples.LogChanges := false;
+  dmPDF.cdsRawData.DisableControls;
+  dmPDF.cdsAgeList.DisableControls;
   try
       dmPDF.cdsRawData.EmptyDataSet;
       dmPDF.cdsPDF.EmptyDataSet;
@@ -484,9 +346,12 @@ begin
     //  dmPDF.cdsRawData.Next;
     //end;
     NPts := dmPDF.cdsRawData.RecordCount;
+    sbMain.Panels[1].Text := 'Imported';
     sbMain.Panels[0].Text := Int2Str(NPts);
     sbMain.Refresh;
+    Application.HandleMessage;
     //ShowMessage(IntToStr(NPts));
+    //check and delete all records with zero age and zero data values
     dmPDF.cdsRawData.Filter := 'UnitAge = '+FormatFloat('###0.000',1.0*zero)+'and Data = '+FormatFloat('###0.000',1.0*zero);
     dmPDF.cdsRawData.Filtered := true;
     tN := dmPDF.cdsRawData.RecordCount;
@@ -498,12 +363,31 @@ begin
       until dmPDF.cdsRawData.Bof;
     end;
     dmPDF.cdsRawData.Filtered := false;
+    if (OptionsOmitNegativeData1.Checked) then
+    begin
+      dmPDF.cdsRawData.Last;
+      repeat
+        if (dmPDF.cdsRawDataData.AsFloat < 0.0) then
+        begin
+          dmPDF.cdsRawData.Delete;
+        end else
+        begin
+          dmPDF.cdsRawData.Prior;
+        end;
+      until dmPDF.cdsRawData.Bof;
+    end;
+    NPts := dmPDF.cdsRawData.RecordCount;
+    sbMain.Panels[1].Text := 'Cleaned';
+    sbMain.Panels[0].Text := Int2Str(NPts);
+    sbMain.Refresh;
+    Application.HandleMessage;
     //ShowMessage('6');
     if (NPts > 2) then
     begin
       dbgRawData.DataSource := nil;
       dbnRawData.DataSource := nil;
       dmPDF.cdsRawData.First;
+      dbgAgeList.DataSource := nil;
       Mean := 0.0;
       MaxX := dmPDF.cdsRawDataData.AsFloat;
       MinX := dmPDF.cdsRawDataData.AsFloat;
@@ -548,21 +432,12 @@ begin
       //ShowMessage('sigmabeta1 is '+FormatFloat('####0.0000',sigmabeta1));
       //ShowMessage('power is '+FormatFloat('####0.0000',tx));
       //ShowMessage('Optimum bin width is '+FormatFloat('####0.0000',OptimumBinWidth));
-      if (OptionsOmitNegativeData1.Checked) then
-      begin
-        dmPDF.cdsRawData.Last;
-        repeat
-          if (dmPDF.cdsRawDataData.AsFloat < 0.0) then
-          begin
-            dmPDF.cdsRawData.Delete;
-          end else
-          begin
-            dmPDF.cdsRawData.Prior;
-          end;
-        until dmPDF.cdsRawData.Bof;
-      end;
+
+      //transfer all unique ages in the RawData set into the AgeList set
+      //initialise the AgeList contents with default values for Cawood classification colours
       dmPDF.cdsAgeList.EmptyDataSet;
       dmPDF.cdsRawData.First;
+      ChartOriginalData.Series[0].BeginUpdate;
       ChartOriginalData.Series[0].Clear;
       repeat
         tAge := dmPDF.cdsRawDataUnitAge.AsFloat;
@@ -586,86 +461,109 @@ begin
         ChartOriginalData.Series[0].AddXY(tGrainAge,tAge);
         dmPDF.cdsRawData.Next;
       until (dmPDF.cdsRawData.Eof);
-      dmPDF.cdsAssocSampleAge.EmptyDataSet;
-      dmPDF.cdsRawData.First;
-      dmPDF.cdsAssocSampleAge.DisableControls;
-      repeat
-        tAge := dmPDF.cdsRawDataUnitAge.AsFloat;
-        tAssoc := dmPDF.cdsRawDataAssoc.AsString;
-        tSampleNo := dmPDF.cdsRawDataSampleNo.AsString;
-        dmPDF.cdsAssocSampleAge.Locate('Association;SampleNo;DeposAge',VarArrayOf([tAssoc,tSampleNo,tAge]),[]);
-        tMatchingAge := dmPDF.cdsAssocSampleAgeDeposAge.AsFloat;
-        tMatchingAssoc := dmPDF.cdsAssocSampleAgeAssociation.AsString;
-        tMatchingSampleNo := dmPDF.cdsAssocSampleAgeSampleNo.AsString;
-        if ((tAssoc <> tMatchingAssoc) or (tAge <> tMatchingAge) or (tSampleNo <> tMatchingSampleNo)) then
-        begin
-          try
-            dmPDF.cdsAssocSampleAge.Append;
-            dmPDF.cdsAssocSampleAgeAssociation.AsString := dmPDF.cdsRawDataAssoc.AsString;
-            dmPDF.cdsAssocSampleAgeSampleNo.AsString := dmPDF.cdsRawDataSampleNo.AsString;
-            dmPDF.cdsAssocSampleAgeDeposAge.AsFloat := dmPDF.cdsRawDataUnitAge.AsFloat;
-            dmPDF.cdsAssocSampleAge.Post;
-          except
-          end;
-        end;
-        dmPDF.cdsRawData.Next;
-      until (dmPDF.cdsRawData.Eof);
-      dmPDF.cdsRawData.First;
+      ChartOriginalData.Series[0].EndUpdate;
+      if (dmPDF.cdsRawData.ChangeCount > 0) then dmPDF.cdsRawData.MergeChangeLog;
+      if (dmPDF.cdsAgeList.ChangeCount > 0) then dmPDF.cdsAgeList.MergeChangeLog;
     end;
-    dmPDF.cdsAssociations.EmptyDataSet;
-    dmPDF.cdsAssocSampleAge.First;
-    dmPDF.cdsAssociations.DisableControls;
-    repeat
-      tAssoc := dmPDF.cdsAssocSampleAgeAssociation.AsString;
-      dmPDF.cdsAssociations.Locate('Association',VarArrayOf([tAssoc]),[]);
-      tMatchingAssoc := dmPDF.cdsAssociationsAssociation.AsString;
-      if ((tAssoc <> tMatchingAssoc)) then
-      begin
-        try
-          dmPDF.cdsAssociations.Append;
-          dmPDF.cdsAssociationsAssociation.AsString := dmPDF.cdsAssocSampleAgeAssociation.AsString;
-          dmPDF.cdsAssociations.Post;
-        except
-        end;
-      end;
-      dmPDF.cdsAssocSampleAge.Next;
-    until (dmPDF.cdsAssocSampleAge.Eof);
-    dmPDF.cdsAssociations.EnableControls;
-    dmPDF.cdsAssociations.First;
-    dmPDF.cdsSamples.EmptyDataSet;
-    dmPDF.cdsAssocSampleAge.First;
-    repeat
-      tSampleNo := dmPDF.cdsAssocSampleAgeSampleNo.AsString;
-      dmPDF.cdsSamples.Locate('SampleNo',VarArrayOf([tSampleNo]),[]);
-      tMatchingSampleNo := dmPDF.cdsSamplesSampleNo.AsString;
-      if ((tSampleNo <> tMatchingSampleNo)) then
-      begin
-        try
-          dmPDF.cdsSamples.Append;
-          dmPDF.cdsSamplesSampleNo.AsString := dmPDF.cdsAssocSampleAgeSampleNo.AsString;
-          dmPDF.cdsSamples.Post;
-        except
-        end;
-      end;
-      dmPDF.cdsAssocSampleAge.Next;
-    until (dmPDF.cdsAssocSampleAge.Eof);
-    dmPDF.cdsSamples.First;
-    dmPDF.cdsAssocSampleAge.Filtered := false;
-    dmPDF.cdsAssocSampleAge.First;
-    dmPDF.cdsAssocSampleAge.EnableControls;
     dbgRawData.DataSource := dmPDF.dsRawData;
     dbnRawData.DataSource := dmPDF.dsRawData;
+    dbgAgeList.DataSource := dmPDF.dsAgeList;
     dmPDF.cdsRawData.First;
     dmPDF.cdsAgeList.First;
     fmPDFMain.Refresh;
     sbMain.Panels[1].Text := 'Data imported';
     sbMain.Refresh;
-  //end else
-  //begin
-  //  sbMain.Panels[1].Text := 'Import cancelled';
-  //  sbMain.Refresh;
   end;
   dmPDF.cdsRawData.EnableControls;
+  dmPDF.cdsAgeList.EnableControls;
+  ExportAssociationSampleAges1.Visible := false;
+end;
+
+procedure TfmPDFMain.DetermineAssociations;
+var
+  i, ii : integer;
+  //DataImported : boolean;
+  tGrainAge, tAge : double;
+  tAssoc, tSampleNo : string;
+  tMatchingAge : double;
+  tMatchingAssoc, tMatchingSampleNo : string;
+begin
+  sbMain.Panels[1].Text := 'Associating samples';
+  sbMain.Refresh;
+  Application.HandleMessage;
+  dmPDF.cdsAssocSampleAge.EmptyDataSet;
+  dmPDF.cdsRawData.First;
+  dmPDF.cdsAssocSampleAge.DisableControls;
+  repeat
+    tAge := dmPDF.cdsRawDataUnitAge.AsFloat;
+    tAssoc := dmPDF.cdsRawDataAssoc.AsString;
+    tSampleNo := dmPDF.cdsRawDataSampleNo.AsString;
+    dmPDF.cdsAssocSampleAge.Locate('Association;SampleNo;DeposAge',VarArrayOf([tAssoc,tSampleNo,tAge]),[]);
+    tMatchingAge := dmPDF.cdsAssocSampleAgeDeposAge.AsFloat;
+    tMatchingAssoc := dmPDF.cdsAssocSampleAgeAssociation.AsString;
+    tMatchingSampleNo := dmPDF.cdsAssocSampleAgeSampleNo.AsString;
+    if ((tAssoc <> tMatchingAssoc) or (tAge <> tMatchingAge) or (tSampleNo <> tMatchingSampleNo)) then
+    begin
+      try
+        dmPDF.cdsAssocSampleAge.Append;
+        dmPDF.cdsAssocSampleAgeAssociation.AsString := dmPDF.cdsRawDataAssoc.AsString;
+        dmPDF.cdsAssocSampleAgeSampleNo.AsString := dmPDF.cdsRawDataSampleNo.AsString;
+        dmPDF.cdsAssocSampleAgeDeposAge.AsFloat := dmPDF.cdsRawDataUnitAge.AsFloat;
+        dmPDF.cdsAssocSampleAge.Post;
+      except
+      end;
+    end;
+    dmPDF.cdsRawData.Next;
+  until (dmPDF.cdsRawData.Eof);
+  dmPDF.cdsRawData.First;
+  dmPDF.cdsAssociations.EmptyDataSet;
+  dmPDF.cdsAssocSampleAge.First;
+  dmPDF.cdsAssociations.DisableControls;
+  repeat
+    tAssoc := dmPDF.cdsAssocSampleAgeAssociation.AsString;
+    dmPDF.cdsAssociations.Locate('Association',VarArrayOf([tAssoc]),[]);
+    tMatchingAssoc := dmPDF.cdsAssociationsAssociation.AsString;
+    if ((tAssoc <> tMatchingAssoc)) then
+    begin
+      try
+        dmPDF.cdsAssociations.Append;
+        dmPDF.cdsAssociationsAssociation.AsString := dmPDF.cdsAssocSampleAgeAssociation.AsString;
+        dmPDF.cdsAssociations.Post;
+      except
+      end;
+    end;
+    dmPDF.cdsAssocSampleAge.Next;
+  until (dmPDF.cdsAssocSampleAge.Eof);
+  dmPDF.cdsAssociations.EnableControls;
+  dmPDF.cdsAssociations.First;
+  dmPDF.cdsSamples.EmptyDataSet;
+  dmPDF.cdsAssocSampleAge.First;
+  repeat
+    tSampleNo := dmPDF.cdsAssocSampleAgeSampleNo.AsString;
+    dmPDF.cdsSamples.Locate('SampleNo',VarArrayOf([tSampleNo]),[]);
+    tMatchingSampleNo := dmPDF.cdsSamplesSampleNo.AsString;
+    if ((tSampleNo <> tMatchingSampleNo)) then
+    begin
+      try
+        dmPDF.cdsSamples.Append;
+        dmPDF.cdsSamplesSampleNo.AsString := dmPDF.cdsAssocSampleAgeSampleNo.AsString;
+        dmPDF.cdsSamples.Post;
+      except
+      end;
+    end;
+    dmPDF.cdsAssocSampleAge.Next;
+  until (dmPDF.cdsAssocSampleAge.Eof);
+  dmPDF.cdsSamples.First;
+  dmPDF.cdsAssocSampleAge.Filtered := false;
+  dmPDF.cdsAssocSampleAge.First;
+  dmPDF.cdsAssocSampleAge.EnableControls;
+  dmPDF.cdsRawData.First;
+  dmPDF.cdsAgeList.First;
+  fmPDFMain.Refresh;
+  sbMain.Panels[1].Text := 'Associations prepared';
+  sbMain.Refresh;
+  dmPDF.cdsRawData.EnableControls;
+  dmPDF.cdsAgeList.EnableControls;
   ExportAssociationSampleAges1.Visible := true;
 end;
 
@@ -991,7 +889,7 @@ var
   SigmaFactorStr : string;
   ExtraVarCutoffStr : string;
   ExtraVarCutoffMinStr, ExtraVarCutoffMaxStr : string;
-  PublicPath : string;
+  HomePath : string;
   UserSpecifiedStepsStr : string;
   StepsSelectionStr : string;
   tSteps : integer;
@@ -1003,25 +901,30 @@ var
   ExtraCutoff3Str, ExtraCutoff4Str : string;
   //CurrentStyle : string;
 begin
-  //PublicPath := TPath.GetPublicPath;
-  //Used to use CSIDL_COMMON_APPDATA but some users do not have access to this
-  //and don't know how to change their system settings and permissions to all
-  //software to write to this path.
-  //Now changed to use CSIDL_COMMON_DOCUMENTS which automatically permits
-  //all users to have both read and write permission
-  PublicPath := TPath.GetHomePath;
-  CommonFilePath := IncludeTrailingPathDelimiter(PublicPath) + 'EggSoft\';
-  IniFilename := CommonFilePath + 'FitPDF.ini';
+  // stored settings in per user folder
+  {$IFDEF MACOS}
+    HomePath := TPath.GetLibraryPath;
+  {$ELSE}
+    HomePath := TPath.GetHomePath;
+  {$ENDIF}
+  //CommonFilePath := IncludeTrailingPathDelimiter(HomePath) + 'EggSoft\';
+  CommonFilePath := TPath.Combine(HomePath,'EggSoft');
+  IniFilename := TPath.Combine(CommonFilePath,'FitPDF.ini');
+  //ShowMessage(IniFilename);
   IniFilePath := CommonFilePath;
-  ProgramFilePath := IniFilePath + 'FitPDF\';
+  ProgramFilePath := TPath.Combine(IniFilePath,'FitPDF');
   AppIni := TIniFile.Create(IniFilename);
   try
-    DataPath := AppIni.ReadString('Paths','Data path','C:\');
-    ExportPath := AppIni.ReadString('Paths','Spreadsheet exports path','C:\');
-    FlexTemplatePath := AppIni.ReadString('Paths','Spreadsheet template path',CommonFilePath+'FitPDF\Templates\');
-    //MyCurrentStyle := AppIni.ReadString('MyStyle','MyCurrentStyle','Windows10');
-    GlobalChosenStyle := AppIni.ReadString('Styles','Chosen style','Windows');
-    if (GlobalChosenStyle = '') then GlobalChosenStyle := 'Windows';
+    DataPath := AppIni.ReadString('Paths','Data path',CommonFilePath);
+    ExportPath := AppIni.ReadString('Paths','Spreadsheet exports path',CommonFilePath);
+    FlexTemplatePath := AppIni.ReadString('Paths','Spreadsheet template path',TPath.Combine(CommonFilePath,'FitPDF','Templates'));
+    {$IFDEF MACOS}
+      GlobalChosenStyle = '';
+    {$ELSE}
+      //MyCurrentStyle := AppIni.ReadString('MyStyle','MyCurrentStyle','Windows10');
+      GlobalChosenStyle := AppIni.ReadString('Styles','Chosen style','Windows');
+      if (GlobalChosenStyle = '') then GlobalChosenStyle := 'Windows';
+    {$ENDIF}
     dmPDF.ChosenStyle := GlobalChosenStyle;
     DataColStr := UpperCase(AppIni.ReadString('ColumnDefinitions','DataColStr','A'));
     SigmaColStr := UpperCase(AppIni.ReadString('ColumnDefinitions','SigmaColStr','B'));
@@ -1154,19 +1057,17 @@ var
   ExtraVarCutoffMinStr, ExtraVarCutoffMaxStr : string;
   UserSpecifiedStepsStr : string;
   StepsSelectionStr : string;
-  PublicPath : string;
+  HomePath : string;
   DateAsString : string;
   TimeAsString : string;
 begin
-  //Used to use CSIDL_COMMON_APPDATA but some users do not have access to this
-  //and don't know how to change their system settings and permissions to all
-  //software to write to this path.
-  //Now changed to use CSIDL_COMMON_DOCUMENTS which automatically permits
-  //all users to have both read and write permission
-  //ShowMessage(MyCurrentStyle);
-  PublicPath := TPath.GetHomePath;
-  CommonFilePath := IncludeTrailingPathDelimiter(PublicPath) + 'EggSoft\';
-  IniFilename := CommonFilePath + 'FitPDF.ini';
+  {$IFDEF MACOS}
+    HomePath := TPath.GetLibraryPath;
+  {$ELSE}
+    HomePath := TPath.GetHomePath;
+  {$ENDIF}
+  CommonFilePath := TPath.Combine(HomePath,'EggSoft');
+  IniFilename := TPath.Combine(CommonFilePath,'FitPDF.ini');
   UserSpecifiedStepsStr := IntToStr(UserSpecifiedSteps);
   SigmaFactorStr := FormatFloat('##0.000',dmPDF.SigmaFactor);
   //ExtraVarCutoffStr := FormatFloat('##0.000',dmPDF.ExtraVarCutoff);
@@ -1373,7 +1274,7 @@ begin
   ExportGraphValues1.Visible := false;
   ExportProvenanceLimits1.Visible := false;
   ExportAssociationSampleAges1.Visible := false;
-  GetIniFile;
+  //GetIniFile;
   FromRowValueString := '2';
   ToRowValueString := '2';
   FromAge := 0.0;
@@ -1893,6 +1794,8 @@ begin
            MessageDlg('No deposition ages have been specified',mtWarning,[mbOK],0);
            Exit;
         end;
+        ExportAssociationSampleAges1.Visible := true;
+        DetermineAssociations;
         dmPDF.cdsAgeList.IndexFieldNames := 'UnitAge';
         ChartGeotectonic.Series[0].Clear;
         ChartGeotectonic.Series[1].Clear;
