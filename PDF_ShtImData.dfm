@@ -52,9 +52,9 @@ object fmSheetImport: TfmSheetImport
       Height = 25
       Hint = 'Select spread sheet'
       Caption = '&Open'
-      ImageIndex = 20
-      ImageName = 'folder'
-      Images = SVGIconVirtualImageList1
+      ImageIndex = 27
+      ImageName = 'Trayse101-Basic-Filetypes-2'
+      Images = VirtualImageList1
       NumGlyphs = 2
       TabOrder = 0
       OnClick = bbOpenSheetClick
@@ -65,9 +65,9 @@ object fmSheetImport: TfmSheetImport
       Width = 75
       Height = 25
       Caption = '&Cancel'
-      ImageIndex = 9
-      ImageName = 'cancel'
-      Images = SVGIconVirtualImageList1
+      ImageIndex = 10
+      ImageName = 'stop'
+      Images = VirtualImageList1
       ModalResult = 2
       TabOrder = 1
       OnClick = bbCancelClick
@@ -309,9 +309,9 @@ object fmSheetImport: TfmSheetImport
         Height = 25
         Hint = 'Import selected data from spreadsheet'
         Caption = '&Import'
-        ImageIndex = 27
-        ImageName = 'import'
-        Images = SVGIconVirtualImageList1
+        ImageIndex = 36
+        ImageName = 'Gakuseisean-Ivista-2-Misc-Download'
+        Images = VirtualImageList1
         ModalResult = 1
         NumGlyphs = 2
         TabOrder = 0
@@ -354,7 +354,6 @@ object fmSheetImport: TfmSheetImport
           Hint = 'Find end of data in file'
           ImageIndex = 19
           ImageName = 'filled_filter'
-          Images = SVGIconVirtualImageList1
           NumGlyphs = 2
           ParentShowHint = False
           ShowHint = True
@@ -534,275 +533,213 @@ object fmSheetImport: TfmSheetImport
         CollectionIndex = 15
         CollectionName = 'copy_clipboard_lined'
         Name = 'copy_clipboard_lined'
-      end>
-    ImageCollection = dmPDF.ImageCollection1
-    Left = 488
-  end
-  object SVGIconVirtualImageList1: TSVGIconVirtualImageList
-    AutoFill = True
-    Images = <
-      item
-        CollectionIndex = 0
-        CollectionName = 'about'
-        Name = 'about'
-      end
-      item
-        CollectionIndex = 1
-        CollectionName = 'alphabetical_sorting_az'
-        Name = 'alphabetical_sorting_az'
-      end
-      item
-        CollectionIndex = 2
-        CollectionName = 'approval'
-        Name = 'approval'
-      end
-      item
-        CollectionIndex = 3
-        CollectionName = 'approve'
-        Name = 'approve'
-      end
-      item
-        CollectionIndex = 4
-        CollectionName = 'area_chart'
-        Name = 'area_chart'
-      end
-      item
-        CollectionIndex = 5
-        CollectionName = 'automatic'
-        Name = 'automatic'
-      end
-      item
-        CollectionIndex = 6
-        CollectionName = 'bar_chart'
-        Name = 'bar_chart'
-      end
-      item
-        CollectionIndex = 7
-        CollectionName = 'calculator'
-        Name = 'calculator'
-      end
-      item
-        CollectionIndex = 8
-        CollectionName = 'calendar'
-        Name = 'calendar'
-      end
-      item
-        CollectionIndex = 9
-        CollectionName = 'cancel'
-        Name = 'cancel'
-      end
-      item
-        CollectionIndex = 10
-        CollectionName = 'checkmark'
-        Name = 'checkmark'
-      end
-      item
-        CollectionIndex = 11
-        CollectionName = 'clear_filters'
-        Name = 'clear_filters'
-      end
-      item
-        CollectionIndex = 12
-        CollectionName = 'combo_chart'
-        Name = 'combo_chart'
-      end
-      item
-        CollectionIndex = 13
-        CollectionName = 'data_sheet'
-        Name = 'data_sheet'
-      end
-      item
-        CollectionIndex = 14
-        CollectionName = 'document'
-        Name = 'document'
-      end
-      item
-        CollectionIndex = 15
-        CollectionName = 'download'
-        Name = 'download'
       end
       item
         CollectionIndex = 16
-        CollectionName = 'empty_filter'
-        Name = 'empty_filter'
+        CollectionName = 'Cornmanthe3rd-Plex-System-recycling-bin'
+        Name = 'Cornmanthe3rd-Plex-System-recycling-bin'
       end
       item
         CollectionIndex = 17
-        CollectionName = 'export'
-        Name = 'export'
+        CollectionName = 'Cornmanthe3rd-Plex-System'
+        Name = 'Cornmanthe3rd-Plex-System'
       end
       item
         CollectionIndex = 18
-        CollectionName = 'file'
-        Name = 'file'
+        CollectionName = 'Cornmanthe3rd-Plex-Utilities'
+        Name = 'Cornmanthe3rd-Plex-Utilities'
       end
       item
         CollectionIndex = 19
-        CollectionName = 'filled_filter'
-        Name = 'filled_filter'
+        CollectionName = 'Hamzasaleem-Stock-Folder-Big'
+        Name = 'Hamzasaleem-Stock-Folder-Big'
       end
       item
         CollectionIndex = 20
-        CollectionName = 'folder'
-        Name = 'folder'
+        CollectionName = 'Hopstarter-Sleek-Xp-Basic'
+        Name = 'Hopstarter-Sleek-Xp-Basic'
       end
       item
         CollectionIndex = 21
-        CollectionName = 'generic_sorting_asc'
-        Name = 'generic_sorting_asc'
+        CollectionName = 'img.icons8'
+        Name = 'img.icons8'
       end
       item
         CollectionIndex = 22
-        CollectionName = 'generic_sorting_desc'
-        Name = 'generic_sorting_desc'
+        CollectionName = 'Kyo-Tux-Phuzion-Device'
+        Name = 'Kyo-Tux-Phuzion-Device'
       end
       item
         CollectionIndex = 23
-        CollectionName = 'globe'
-        Name = 'globe'
+        CollectionName = 'Kyo-Tux-Phuzion-Misc'
+        Name = 'Kyo-Tux-Phuzion-Misc'
       end
       item
         CollectionIndex = 24
-        CollectionName = 'heat_map'
-        Name = 'heat_map'
+        CollectionName = 'Kyo-Tux-Phuzion-Sign'
+        Name = 'Kyo-Tux-Phuzion-Sign'
       end
       item
         CollectionIndex = 25
-        CollectionName = 'home'
-        Name = 'home'
+        CollectionName = 'Kyo-Tux-Phuzion-System'
+        Name = 'Kyo-Tux-Phuzion-System'
       end
       item
         CollectionIndex = 26
-        CollectionName = 'image_file'
-        Name = 'image_file'
+        CollectionName = 'Rskys-Windows-Business'
+        Name = 'Rskys-Windows-Business'
       end
       item
         CollectionIndex = 27
-        CollectionName = 'import'
-        Name = 'import'
+        CollectionName = 'Trayse101-Basic-Filetypes-2'
+        Name = 'Trayse101-Basic-Filetypes-2'
       end
       item
         CollectionIndex = 28
-        CollectionName = 'info'
-        Name = 'info'
+        CollectionName = 'Aha-Soft-Free-3d-Glossy-Interface'
+        Name = 'Aha-Soft-Free-3d-Glossy-Interface'
       end
       item
         CollectionIndex = 29
-        CollectionName = 'inspection'
-        Name = 'inspection'
+        CollectionName = 'Ampeross-Ampola-Folder'
+        Name = 'Ampeross-Ampola-Folder'
       end
       item
         CollectionIndex = 30
-        CollectionName = 'internal'
-        Name = 'internal'
+        CollectionName = 'Custom-Icon-Design-Pretty-Office-9-Open'
+        Name = 'Custom-Icon-Design-Pretty-Office-9-Open'
       end
       item
         CollectionIndex = 31
-        CollectionName = 'line_chart'
-        Name = 'line_chart'
+        CollectionName = 'Double-J-Design-Ravenna-3d-Database'
+        Name = 'Double-J-Design-Ravenna-3d-Database'
       end
       item
         CollectionIndex = 32
-        CollectionName = 'menu'
-        Name = 'menu'
+        CollectionName = 'Fasticon-Database-Table'
+        Name = 'Fasticon-Database-Table'
       end
       item
         CollectionIndex = 33
-        CollectionName = 'next'
-        Name = 'next'
+        CollectionName = 'Fasticon-Database'
+        Name = 'Fasticon-Database'
       end
       item
         CollectionIndex = 34
-        CollectionName = 'numerical_sorting_12'
-        Name = 'numerical_sorting_12'
+        CollectionName = 'Flat-Icons.com-Square'
+        Name = 'Flat-Icons.com-Square'
       end
       item
         CollectionIndex = 35
-        CollectionName = 'numerical_sorting_21'
-        Name = 'numerical_sorting_21'
+        CollectionName = 'Flat-Icons.com-Square-Graph'
+        Name = 'Flat-Icons.com-Square-Graph'
       end
       item
         CollectionIndex = 36
-        CollectionName = 'ok'
-        Name = 'ok'
+        CollectionName = 'Gakuseisean-Ivista-2-Misc-Download'
+        Name = 'Gakuseisean-Ivista-2-Misc-Download'
       end
       item
         CollectionIndex = 37
-        CollectionName = 'pie_chart'
-        Name = 'pie_chart'
+        CollectionName = 'Gakuseisean-Ivista-2-Misc-New'
+        Name = 'Gakuseisean-Ivista-2-Misc-New'
       end
       item
         CollectionIndex = 38
-        CollectionName = 'plus'
-        Name = 'plus'
+        CollectionName = 'Gakuseisean-Ivista-2-Misc-Web'
+        Name = 'Gakuseisean-Ivista-2-Misc-Web'
       end
       item
         CollectionIndex = 39
-        CollectionName = 'previous'
-        Name = 'previous'
+        CollectionName = 'Gartoon-Team-Gartoon-Apps-Gnome-power'
+        Name = 'Gartoon-Team-Gartoon-Apps-Gnome-power'
       end
       item
         CollectionIndex = 40
-        CollectionName = 'print'
-        Name = 'print'
+        CollectionName = 'Gianni-Polito-Colobrush-System-database'
+        Name = 'Gianni-Polito-Colobrush-System-database'
       end
       item
         CollectionIndex = 41
-        CollectionName = 'puzzle'
-        Name = 'puzzle'
+        CollectionName = 'Github-Octicons-Graph'
+        Name = 'Github-Octicons-Graph'
       end
       item
         CollectionIndex = 42
-        CollectionName = 'refresh'
-        Name = 'refresh'
+        CollectionName = 'Graphicloads-Flat-Finance-World'
+        Name = 'Graphicloads-Flat-Finance-World'
       end
       item
         CollectionIndex = 43
-        CollectionName = 'rules'
-        Name = 'rules'
+        CollectionName = 'Hopstarter-Mac-Folders'
+        Name = 'Hopstarter-Mac-Folders'
       end
       item
         CollectionIndex = 44
-        CollectionName = 'scatter_plot'
-        Name = 'scatter_plot'
+        CollectionName = 'Hopstarter-Soft-Scraps-File'
+        Name = 'Hopstarter-Soft-Scraps-File'
       end
       item
         CollectionIndex = 45
-        CollectionName = 'search'
-        Name = 'search'
+        CollectionName = 'Icojam-Blue-Bits-Database'
+        Name = 'Icojam-Blue-Bits-Database'
       end
       item
         CollectionIndex = 46
-        CollectionName = 'settings'
-        Name = 'settings'
+        CollectionName = 'Icojam-Blue-Bits-Database-arrow'
+        Name = 'Icojam-Blue-Bits-Database-arrow'
       end
       item
         CollectionIndex = 47
-        CollectionName = 'support'
-        Name = 'support'
+        CollectionName = 'Icons8-Ios7-Data-Area'
+        Name = 'Icons8-Ios7-Data-Area'
       end
       item
         CollectionIndex = 48
-        CollectionName = 'template'
-        Name = 'template'
+        CollectionName = 'Icons8-Ios7-Data-Line'
+        Name = 'Icons8-Ios7-Data-Line'
       end
       item
         CollectionIndex = 49
-        CollectionName = 'undo'
-        Name = 'undo'
+        CollectionName = 'Icons8-Ios7-Data-Scatter'
+        Name = 'Icons8-Ios7-Data-Scatter'
       end
       item
         CollectionIndex = 50
-        CollectionName = 'upload'
-        Name = 'upload'
+        CollectionName = 'Iconsmind-Outline'
+        Name = 'Iconsmind-Outline'
       end
       item
         CollectionIndex = 51
-        CollectionName = 'view_details'
-        Name = 'view_details'
+        CollectionName = 'Saki-Snowish-Mimetypes-gnome-mime-application-vnd-lotus-1-2'
+        Name = 'Saki-Snowish-Mimetypes-gnome-mime-application-vnd-lotus-1-2'
+      end
+      item
+        CollectionIndex = 52
+        CollectionName = 'Tatice-Operating-Systems'
+        Name = 'Tatice-Operating-Systems'
+      end
+      item
+        CollectionIndex = 53
+        CollectionName = 'Treetog-Junior-Document'
+        Name = 'Treetog-Junior-Document'
+      end
+      item
+        CollectionIndex = 54
+        CollectionName = 'Custom-Icon-Design-Pretty-Office-2'
+        Name = 'Custom-Icon-Design-Pretty-Office-2'
+      end
+      item
+        CollectionIndex = 55
+        CollectionName = 'Enhancedlabs-Longhorn-Pinstripe-Help'
+        Name = 'Enhancedlabs-Longhorn-Pinstripe-Help'
+      end
+      item
+        CollectionIndex = 56
+        CollectionName = 'Hopstarter-Button-Button'
+        Name = 'Hopstarter-Button-Button'
       end>
-    ImageCollection = dmPDF.SVGIconImageCollection1
-    Left = 600
-    Top = 8
+    ImageCollection = dmImageCollection.ImageCollection1
+    Left = 488
   end
 end

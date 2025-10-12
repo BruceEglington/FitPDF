@@ -16,7 +16,7 @@ uses
   VCLTee.TeePoin3,
   VCLTee.TeeVideo, VCLTee.TeeSurfa, VCLTee.TeeTriSurface, VCLTee.Series,
   System.ImageList, Vcl.ImgList, Vcl.VirtualImageList,
-  PDF_varb, SVGIconVirtualImageList;
+  PDF_varb, ImageCollection_dm;
 
 type
   TfmPDFMain = class(TForm)
@@ -217,7 +217,6 @@ type
     Button1: TButton;
     Button2: TButton;
     Test1: TMenuItem;
-    SVGIconVirtualImageList1: TSVGIconVirtualImageList;
     pOriginalData: TPanel;
     Panel24: TPanel;
     dbgRawData: TDBGrid;
@@ -227,6 +226,9 @@ type
     ChartOriginalData: TChart;
     Series7: TPointSeries;
     Panel6: TPanel;
+    StorePDFand1: TMenuItem;
+    N4: TMenuItem;
+    StorePDFor1: TMenuItem;
     procedure ImportRawData1Click(Sender: TObject);
     procedure About1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -254,6 +256,8 @@ type
     procedure Button2Click(Sender: TObject);
     procedure StyleClick(Sender: TObject);
     procedure Test1Click(Sender: TObject);
+    procedure StorePDFand1Click(Sender: TObject);
+    procedure StorePDFor1Click(Sender: TObject);
   private
     { Private declarations }
     MyCurrentStyle : string;
@@ -1141,6 +1145,46 @@ begin
   Steps := UserSpecifiedSteps;
   StepsMaximum.Checked := false;
   StepsUserSpecified.Checked := true;
+end;
+
+procedure TfmPDFMain.StorePDFand1Click(Sender: TObject);
+var
+  i, j : integer;
+  tAge, tX, tY, tTotal : double;
+  Range : double;
+  Increment : double;
+begin
+  Range := ToAge - FromAge;
+  Increment := Range / (1.0*MaxSteps);
+  tTotal := 0.0;
+  tAge := FromAge;
+  dmPDF.cdsPDF.First;
+  dmPDF.FDmemCompare.First;
+  for i := 0 to MaxSteps do
+  begin
+    dmPDF.FDmemCompareStep.AsInteger := i;
+    dmPDF.FDmemCompareAgeValue.AsFloat := tAge;
+    dmPDF.FDmemComparePDFand.AsFloat := 0.0;
+    dmPDF.FDmemCompareCum_and.AsFloat := 0.0;
+    tAge := tAge + Increment;
+    tTotal := tTotal + dmPDF.cdsPDFPDFValue.AsFloat;
+    dmPDF.FDmemCompare.Next;
+    dmPDF.cdsPDF.Next;
+  end;
+  dmPDF.cdsPDF.First;
+  dmPDF.FDmemCompare.First;
+  repeat
+    dmPDF.FDmemComparePDFand.AsFloat := dmPDF.cdsPDFPDFValue.AsFloat;
+    dmPDF.FDmemCompareCum_and.AsFloat := 100.0*dmPDF.cdsPDFPDFValue.AsFloat/tTotal;
+    dmPDF.cdsPDF.Next;
+    dmPDF.FDmemCompare.Next;
+  until dmPDF.cdsPDF.Eof;
+  dmPDF.FDmemCompare.SaveToFile()
+end;
+
+procedure TfmPDFMain.StorePDFor1Click(Sender: TObject);
+begin
+         //
 end;
 
 procedure TfmPDFMain.StyleClick(Sender: TObject);

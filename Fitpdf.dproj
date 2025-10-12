@@ -4,7 +4,7 @@
         <MainSource>Fitpdf.dpr</MainSource>
         <Config Condition="'$(Config)'==''">Release</Config>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-        <ProjectVersion>20.1</ProjectVersion>
+        <ProjectVersion>20.3</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
         <Platform Condition="'$(Platform)'==''">Win64</Platform>
@@ -92,7 +92,7 @@
         <VerInfo_MinorVer>2</VerInfo_MinorVer>
         <VerInfo_Build>0</VerInfo_Build>
         <DCC_ExeOutput>C:\EXE32\</DCC_ExeOutput>
-        <DCC_UnitSearchPath>C:\DCU32;C:\Program Files (x86)\Steema Software\Steema TeeChart Pro VCL FMX 2020.29\Delphi26\Delphi26.win32\Lib;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>C:\DCU32;C:\Program Files (x86)\Steema Software\Steema TeeChart Pro VCL FMX 2025.45\Delphi37\Delphi37.win32;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>Fitpdf_Icon.ico</Icon_MainIcon>
         <VerInfo_Keys>CompanyName=EggSoft;FileVersion=2.2.0.0;InternalName=FitPDF;LegalCopyright=Bruce Eglington;LegalTrademarks=;OriginalFilename=FitPDF;ProductVersion=2.2.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
@@ -111,8 +111,6 @@
         <DCC_Namespace>System.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_Keys>CompanyName=EggSoft;FileVersion=2.3.0.0;InternalName=FitPDF;LegalCopyright=Bruce Eglington;LegalTrademarks=;OriginalFilename=FitPDF;ProductVersion=2.2.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <Icon_MainIcon>Fitpdf_Icon.ico</Icon_MainIcon>
-        <DCC_DcpOutput>C:\DCP64\</DCC_DcpOutput>
-        <DCC_BplOutput>C:\DCP64\</DCC_BplOutput>
         <BRCC_EnableMultiByte>true</BRCC_EnableMultiByte>
         <BRCC_Verbose>true</BRCC_Verbose>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
@@ -140,7 +138,7 @@
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <VerInfo_AutoGenVersion>false</VerInfo_AutoGenVersion>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Keys>CompanyName=EggSoft;FileVersion=2.7.0.1;InternalName=FitPDF;LegalCopyright=Bruce Eglington;LegalTrademarks=;OriginalFilename=FitPDF;ProductVersion=2.7.0.7;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=EggSoft;FileVersion=2.7.0.3;InternalName=FitPDF;LegalCopyright=Bruce Eglington;LegalTrademarks=;OriginalFilename=FitPDF;ProductVersion=2.7.0.7;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_MajorVer>2</VerInfo_MajorVer>
         <VerInfo_MinorVer>7</VerInfo_MinorVer>
@@ -149,10 +147,9 @@
         <DCC_DebugInformation>2</DCC_DebugInformation>
         <DCC_MapFile>3</DCC_MapFile>
         <BT_BuildType>Debug</BT_BuildType>
-        <DCC_UnitSearchPath>C:\Users\bre255\Documents\TMSSoftware\FlexCelVCLNT\Packages\d12\Win64\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_Define>madExcept;$(DCC_Define)</DCC_Define>
         <DCC_ShowGeneralMessages>true</DCC_ShowGeneralMessages>
-        <VerInfo_Build>1</VerInfo_Build>
+        <VerInfo_Build>3</VerInfo_Build>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -172,13 +169,12 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <BT_BuildType>Debug</BT_BuildType>
-        <DCC_DcpOutput>C:\DCP64\</DCC_DcpOutput>
         <VerInfo_Build>0</VerInfo_Build>
         <Icon_MainIcon>Fitpdf_Icon.ico</Icon_MainIcon>
         <VerInfo_MinorVer>0</VerInfo_MinorVer>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
-        <DCC_UnitSearchPath>C:\Users\bre255\Documents\TMSSoftware\FlexCelVCLNT\Packages\dRio\Win64\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>C:\Users\Bruce Eglington\AppData\Local\tms\Products\tms.flexcel.vcl\Packages\d12+\37.0\Win64;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -207,6 +203,11 @@
         <DCCReference Include="PDF_ShtImData.pas">
             <Form>fmSheetImport</Form>
             <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Eglington Delphi common code items\ImageCollection_dm.pas">
+            <Form>dmImageCollection</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
@@ -262,21 +263,15 @@
                     <VersionInfoKeys Name="Comments"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k290.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp290.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\madCollection\madBasic\BDS23\win32\madBasic_.bpl">madBasic  ·  www.madshi.net</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\madCollection\madBasic\BDS23\win32\madHelp_.bpl">madHelp  ·  www.madshi.net</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\madCollection\madDisAsm\BDS23\win32\madDisAsm_.bpl">madDisAsm  ·  www.madshi.net</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\madCollection\madExcept\BDS23\win32\madExcept_.bpl">madExcept  ·  www.madshi.net</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\madCollection\madExcept\BDS23\win32\madExceptVcl_.bpl">madExceptVcl  ·  www.madshi.net</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\madCollection\madExcept\BDS23\win32\madExceptWizard_.bpl">madExceptWizard  ·  www.madshi.net</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k370.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp370.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Platforms>
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">True</Platform>
             </Platforms>
-            <Deployment Version="4">
+            <Deployment Version="5">
                 <DeployFile LocalName="C:\EXE32\Fitpdf.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="C:\EXE64\Fitpdf.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName="C:\EXE64\Fitpdf.exe" Configuration="Release" Class="ProjectOutput">
@@ -295,16 +290,6 @@
                     </Platform>
                     <Platform Name="Win32">
                         <Operation>0</Operation>
-                    </Platform>
-                </DeployClass>
-                <DeployClass Name="AndroidClasses">
-                    <Platform Name="Android">
-                        <RemoteDir>classes</RemoteDir>
-                        <Operation>64</Operation>
-                    </Platform>
-                    <Platform Name="Android64">
-                        <RemoteDir>classes</RemoteDir>
-                        <Operation>64</Operation>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="AndroidFileProvider">
@@ -406,6 +391,16 @@
                     </Platform>
                     <Platform Name="Android64">
                         <RemoteDir>res\values-v31</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashStylesV35">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values-v35</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\values-v35</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>

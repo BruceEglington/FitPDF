@@ -8,7 +8,10 @@ uses
   WideStrings, FMTBcd, SqlExpr,
   midaslib, VCL.FlexCel.Core,
   Datasnap.DBClient, NumRecipes, NumRecipes_varb, Vcl.BaseImageCollection,
-  Vcl.ImageCollection, SVGIconImageCollection;
+  Vcl.ImageCollection, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TdmPDF = class(TDataModule)
@@ -69,7 +72,6 @@ type
     cdsAssocSampleAgeAssociation: TStringField;
     cdsAssocSampleAgeSampleNo: TStringField;
     cdsAssocSampleAgeDeposAge: TFloatField;
-    ImageCollection1: TImageCollection;
     cdsRawDataAssoc: TStringField;
     cdsAssociations: TClientDataSet;
     dsAssociations: TDataSource;
@@ -77,7 +79,12 @@ type
     dsSamples: TDataSource;
     cdsSamplesSampleNo: TStringField;
     cdsAssociationsAssociation: TStringField;
-    SVGIconImageCollection1: TSVGIconImageCollection;
+    FDmemCompare: TFDMemTable;
+    FDmemCompareStep: TIntegerField;
+    FDmemCompareAgeValue: TFloatField;
+    FDmemComparePDFand: TFloatField;
+    FDmemComparePDFor: TFloatField;
+    FDmemCompareCum_and: TFloatField;
   private
     { Private declarations }
   public

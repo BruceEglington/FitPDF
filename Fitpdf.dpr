@@ -15,7 +15,8 @@ uses
   NumRecipes in '..\Eglington Delphi common code items\NumRecipes.pas',
   NumRecipes_varb in '..\Eglington Delphi common code items\NumRecipes_varb.pas',
   RecError in '..\Eglington Delphi common code items\RecError.pas' {ReconcileErrorForm},
-  PDF_ShtImData in 'PDF_ShtImData.pas' {fmSheetImport};
+  PDF_ShtImData in 'PDF_ShtImData.pas' {fmSheetImport},
+  ImageCollection_dm in '..\Eglington Delphi common code items\ImageCollection_dm.pas' {dmImageCollection: TDataModule};
 
 {$R *.res}
 
@@ -25,5 +26,6 @@ begin
   Application.CreateForm(TdmPDF, dmPDF);
   Application.CreateForm(TfmPDFMain, fmPDFMain);
   Application.CreateForm(TfmSheetImport, fmSheetImport);
+  Application.CreateForm(TdmImageCollection, dmImageCollection);
   Application.Run;
 end.

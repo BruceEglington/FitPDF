@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
   VCL.FlexCel.Core, FlexCel.XlsAdapter,  Vcl.ComCtrls, Vcl.Grids,
   UCellReader, USparseArray, System.Generics.Collections, System.ImageList,
-  Vcl.ImgList, Vcl.VirtualImageList, SVGIconVirtualImageList;
+  Vcl.ImgList, Vcl.VirtualImageList, ImageCollection_dm;
 
 type
   TfmSheetImport = class(TForm)
@@ -59,7 +59,6 @@ type
     eAssocColStr: TEdit;
     Label14: TLabel;
     VirtualImageList1: TVirtualImageList;
-    SVGIconVirtualImageList1: TSVGIconVirtualImageList;
     sbFindLastRow: TSpeedButton;
     procedure bbOpenSheetClick(Sender: TObject);
     procedure bbCancelClick(Sender: TObject);

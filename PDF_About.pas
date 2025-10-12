@@ -5,7 +5,7 @@ interface
 uses Windows, Classes, Graphics, Forms, Controls, StdCtrls,
 SysUtils,
   Buttons, ExtCtrls, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList,
-  SVGIconVirtualImageList;
+  ImageCollection_dm;
 
 type
   TAboutBox = class(TForm)
@@ -18,7 +18,7 @@ type
     Memo1: TMemo;
     Panel2: TPanel;
     Panel3: TPanel;
-    SVGIconVirtualImageList1: TSVGIconVirtualImageList;
+    VirtualImageList1: TVirtualImageList;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -31,7 +31,7 @@ var
 
 implementation
 
-uses PDF_varb, PDF_dm;
+uses PDF_varb;
 
 {$R *.DFM}
 
