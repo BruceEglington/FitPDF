@@ -1,6 +1,11 @@
 program Fitpdf;
 
 uses
+  madExcept,
+  madLinkDisAsm,
+  madListHardware,
+  madListProcesses,
+  madListModules,
   Forms,
   PDF_mn in 'PDF_mn.pas' {fmPDFMain},
   PDF_About in 'PDF_About.pas' {AboutBox},

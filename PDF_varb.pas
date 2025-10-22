@@ -9,7 +9,7 @@ const
   FitPDFVersionStr = 'FitPDF (2013-2024)';
   NN = 5000;
   MaxSteps = 2500;
-  FitPDFVersion = '2.7.0';
+  FitPDFVersion = '2.8.0';
   zero         = 0;
   zerofloat    = 0.0;
   DefaultZeroLimit = 1.0e-14;
