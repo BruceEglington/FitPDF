@@ -6,10 +6,10 @@ uses
   SysUtils;
 
 const
-  FitPDFVersionStr = 'FitPDF (2013-2024)';
+  FitPDFVersionStr = 'FitPDF (2013-2025)';
   NN = 5000;
   MaxSteps = 2500;
-  FitPDFVersion = '2.8.0';
+  FitPDFVersion = '2.9.1';
   zero         = 0;
   zerofloat    = 0.0;
   DefaultZeroLimit = 1.0e-14;

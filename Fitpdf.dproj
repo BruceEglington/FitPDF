@@ -138,17 +138,17 @@
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <VerInfo_AutoGenVersion>false</VerInfo_AutoGenVersion>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Keys>CompanyName=EggSoft;FileVersion=2.8.0.3;InternalName=FitPDF;LegalCopyright=Bruce Eglington;LegalTrademarks=;OriginalFilename=FitPDF;ProductVersion=2.8.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=EggSoft;FileVersion=2.9.1.1;InternalName=FitPDF;LegalCopyright=Bruce Eglington;LegalTrademarks=;OriginalFilename=FitPDF;ProductVersion=2.9.1;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_MajorVer>2</VerInfo_MajorVer>
-        <VerInfo_MinorVer>8</VerInfo_MinorVer>
+        <VerInfo_MinorVer>9</VerInfo_MinorVer>
         <Icon_MainIcon>Fitpdf_Icon.ico</Icon_MainIcon>
         <DCC_LocalDebugSymbols>true</DCC_LocalDebugSymbols>
         <BT_BuildType>Debug</BT_BuildType>
-        <DCC_Define>madExcept;$(DCC_Define)</DCC_Define>
         <DCC_ShowGeneralMessages>true</DCC_ShowGeneralMessages>
-        <VerInfo_Build>3</VerInfo_Build>
+        <VerInfo_Build>1</VerInfo_Build>
         <DCC_MapFile>3</DCC_MapFile>
+        <VerInfo_Release>1</VerInfo_Release>
         <DCC_DebugInformation>2</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -209,6 +209,7 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="..\Eglington Delphi common code items\WindowsDarkMode.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

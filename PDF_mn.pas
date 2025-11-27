@@ -288,7 +288,7 @@ uses
   TeeJPEG, TeExport,  AllSorts,
   VCLTee.TeeThemes,
   PDF_About, PDF_dm, PDF_mathproc,
-  PDF_ShtImData;
+  PDF_ShtImData, WindowsDarkMode;
 
 {$R *.DFM}
 {$D+}
@@ -1394,6 +1394,7 @@ begin
       Item.Checked := true;
     Styles1.Add(Item);
   end;
+  SetAppropriateThemeMode('Carbon', 'Windows10');
 end;
 
 procedure TfmPDFMain.bbCalculateClick(Sender: TObject);

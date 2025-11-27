@@ -1,11 +1,6 @@
 program Fitpdf;
 
 uses
-  madExcept,
-  madLinkDisAsm,
-  madListHardware,
-  madListProcesses,
-  madListModules,
   Forms,
   PDF_mn in 'PDF_mn.pas' {fmPDFMain},
   PDF_About in 'PDF_About.pas' {AboutBox},
@@ -21,7 +16,8 @@ uses
   NumRecipes_varb in '..\Eglington Delphi common code items\NumRecipes_varb.pas',
   RecError in '..\Eglington Delphi common code items\RecError.pas' {ReconcileErrorForm},
   PDF_ShtImData in 'PDF_ShtImData.pas' {fmSheetImport},
-  ImageCollection_dm in '..\Eglington Delphi common code items\ImageCollection_dm.pas' {dmImageCollection: TDataModule};
+  ImageCollection_dm in '..\Eglington Delphi common code items\ImageCollection_dm.pas' {dmImageCollection: TDataModule},
+  WindowsDarkMode in '..\Eglington Delphi common code items\WindowsDarkMode.pas';
 
 {$R *.res}
 
